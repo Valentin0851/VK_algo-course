@@ -1,9 +1,10 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
-	"errors"
+
 	"github.com/mitchellh/mapstructure"
 )
 
@@ -31,33 +32,31 @@ type memoryStorage struct {
 	data map[int]Emploee
 }
 
-func newMemoryStorage() *memoryStorage{
+func newMemoryStorage() *memoryStorage {
 	return &memoryStorage{
 		data: make(map[int]Emploee),
 	}
 }
 
-func (s *memoryStorage) insert(e Emploee) error{
+func (s *memoryStorage) insert(e Emploee) error {
 	s.data[e.id] = e
 	return nil
 }
 
-func (s *memoryStorage) get(id int) (Emploee, error){
+func (s *memoryStorage) get(id int) (Emploee, error) {
 	value, exist := s.data[id]
-	if !exist{
+	if !exist {
 		return Emploee{}, errors.New("This element isnt exist!")
 	}
 
 	return value, nil
 }
 
-func (s *memoryStorage) delete(id int) error{
+func (s *memoryStorage) delete(id int) error {
 	delete(s.data, id)
 
 	return nil
 }
-
-
 
 type Point struct {
 	x, y int
@@ -103,4 +102,8 @@ func main() {
 	p1 := Point{}
 	mapstructure.Decode(pointmap, &p1)
 	// fmt.Println(p1)
+
+	var s storage
+	s = newMemoryStorage()
+	s.insert(Emploee{1, "Ya", 15, 32000})
 }
