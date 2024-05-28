@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
     "gigacode.inline": false,
     "gigacode.common.wholeLineCompletion": false
+=======
+    "gigacode.common.wholeLineCompletion": false,
+    "gigacode.inline": false
+>>>>>>> 99ef88e32c0beafab6e15ae33f43c8a6e1c5bcae
 }
